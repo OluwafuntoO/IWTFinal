@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Me - Oluwafunto's Elegance Encyclopedia</title>
+  <link rel="stylesheet" href="layout.css">  
+  <link rel="icon" href="https://jooinn.com/images/gold-jewelry.jpg" type="image/jpg">
+</head>
+
+
+<style>
+    body {
+      background-color: lightgray;
+    }
+    
+    h1 {
+      color: white;
+      text-align: center;
+    }
+    
+    p {
+      font-family: verdana;
+      font-size: 20px;
+    }
+    </style>
+    
+<body>
+    <h1 class="title">Contact Me</h1>
+    <p>If you would like to get in contact with me regarding jewelry or have any questions, please fill out the form below. Thank you!</p>
+
+    <!--
+    <form action="formSubm.php" method="post" autocomplete="on">
+        <h3>Contact Information</h3>
+
+        <label for="first-name">First Name:</label>
+        <input type="text" id="first-name" name="first-name" required> <br><br>
+
+        <label for="last-name">Last Name:</label>
+        <input type="text" id="last-name" name="last-name" required> <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required> <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+-->
+
+<div class="form-container">
+  <h3>Contact Information</h3>
+
+  <form action="formSubm.php" method="POST">
+    <label for="first-name">First Name:</label>
+    <input type="text" id="first-name" name="first-name" required> <br><br>
+
+    <label for="last-name">Last Name:</label>
+    <input type="text" id="last-name" name="last-name" required> <br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required> <br><br>
+
+    <label for="message">Your Message:</label>
+    <textarea id="message" name="message" rows="5" required placeholder="Type your message here..."></textarea> <br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+</div>
+
+    <p id="confirmation-message" style="color: rgb(55, 0, 128); display: none;">Thank you for reaching out! I’ll get back to you soon.</p>
+
+    <script src="formConf.js"></script>  
+    
+
+</body>
+</html>
+
+
+
+
+
+
