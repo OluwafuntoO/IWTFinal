@@ -1,68 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Contact Me - Oluwafunto's Elegance Encyclopedia</title>
-  <link rel="stylesheet" href="layout.css">  
-  <link rel="icon" href="https://jooinn.com/images/gold-jewelry.jpg" type="image/jpg">
+    <meta charset="UTF-8">
+    <title>Contact Me - Oluwafunto's Elegance Encyclopedia</title>
+    <link rel="stylesheet" href="layout.css">  
+    <link rel="icon" href="https://jooinn.com/images/gold-jewelry.jpg" type="image/jpg">
+
+    <style>
+        body {
+            background-color: lightgray;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-family: Verdana, sans-serif;
+        }
+
+        .form-container {
+            width: 50%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 
-
-<style>
-    body {
-      background-color: lightgray;
-    }
-    
-    h1 {
-      color: white;
-      text-align: center;
-    }
-    
-    p {
-      font-family: verdana;
-      font-size: 20px;
-    }
-    </style>
-    
 <body>
     <h1 class="title">Contact Me</h1>
     <p>If you would like to get in contact with me regarding jewelry or have any questions, please fill out the form below. Thank you!</p>
 
+    <div class="form-container">
+        <h3>Contact Information & Review</h3>
 
-<div class="form-container">
-  <h3>Contact Information</h3>
+        <form id="reviewForm">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name" required> <br><br>
 
-  <form action="formSubm.php" method="POST">
-    <label for="first-name">First Name:</label>
-    <input type="text" id="first-name" name="first-name" required> <br><br>
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" required> <br><br>
 
-    <label for="last-name">Last Name:</label>
-    <input type="text" id="last-name" name="last-name" required> <br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required> <br><br>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required> <br><br>
+            <label for="message">Your Message or Review:</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Type your message or review here..."></textarea> <br><br>
 
-    <label for="message">Your Message:</label>
-    <textarea id="message" name="message" rows="5" required placeholder="Type your message here..."></textarea> <br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
-    <input type="submit" value="Submit">
-</form>
+    <h3>Customer Reviews:</h3>
+    <div id="reviewsList"></div>
 
-</div>
-
-    <p id="confirmation-message" style="color: rgb(55, 0, 128); display: none;">Thank you for reaching out! I’ll get back to you soon.</p>
-
-    <script src="formConf.js"></script>  
-    
-
+    <script>
+        document.getElementById("reviewForm").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+        
+            let name = document.getElementById("first-name").value;
+            let lastName = document.getElementById("last-name").value;
+            let email = document.getElementById("email").value;
+            let review = document.getElementById("message").value;
+        
+            let newReview = { name: `${name} ${lastName}`, email: email, review: review };
+        
+           
+            let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+            reviews.push(newReview);
+            localStorage.setItem("reviews", JSON.stringify(reviews));
+        
+            
+            displayReviews();
+        
+     
+            document.getElementById("reviewForm").reset();
+        });
+        
+       
+        function displayReviews() {
+            let reviewsList = document.getElementById("reviewsList");
+            reviewsList.innerHTML = ""; 
+            let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+        
+            reviews.forEach((review, index) => {
+                let reviewElement = document.createElement("p");
+                reviewElement.innerHTML = `<strong>${review.name} (${review.email}):</strong> ${review.review}  
+                <button onclick="deleteReview(${index})">Delete</button>`; 
+                reviewsList.appendChild(reviewElement);
+            });
+        }
+        
+       
+        function deleteReview(index) {
+            let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+            reviews.splice(index, 1);
+            localStorage.setItem("reviews", JSON.stringify(reviews));
+            displayReviews();
+        }
+        
+        
+        window.onload = displayReviews;
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
